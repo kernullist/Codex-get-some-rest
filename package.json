@@ -1,0 +1,13 @@
+{
+  "name": "codex-get-some-rest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ./watch-codex-idle.mjs",
+    "test:message": "node ./show-messagebox.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
