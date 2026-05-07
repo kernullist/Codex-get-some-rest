@@ -8,7 +8,7 @@ import path from "node:path";
 
 const appServerUrl = process.env.CODEX_APP_SERVER_URL ?? "ws://127.0.0.1:47777";
 const transport = process.env.CODEX_APP_SERVER_TRANSPORT ?? "session-log";
-const hookCommand = process.env.ON_CODEX_IDLE_COMMAND ?? "node.exe";
+const hookCommand = process.env.ON_CODEX_IDLE_COMMAND ?? defaultNodeCommand();
 const hookArgs = parseHookArgs(process.env.ON_CODEX_IDLE_ARGS ?? ".\\show-messagebox-and-shutdown.mjs");
 const waitForIdleMs = parsePositiveInteger(process.env.CODEX_IDLE_WAIT_MS, 30000);
 const reconnectMs = parsePositiveInteger(process.env.CODEX_RECONNECT_MS, 2000);
@@ -456,4 +456,12 @@ function defaultProxyArgs() {
     }
 
     return ["app-server", "proxy"];
+}
+
+function defaultNodeCommand() {
+    if (process.platform === "win32") {
+        return "node.exe";
+    }
+
+    return "node";
 }
